@@ -196,6 +196,55 @@ if (localStorage.getItem("isLoggedIn") !== "true") {
 
     }
 
+
+// Iterate over cart items
+    cart.forEach(item => {
+      const listItem = document.createElement("li");
+      listItem.innerHTML = ${item.name} x${item.quantity} - ₹${item.price * item.quantity};
+      cartSummary.appendChild(listItem);
+  
+      total += item.price * item.quantity; 
+      // Calculate total
+    });
+  
+    totalAmount.innerText = ₹${total}; 
+    // Display total amount
+  }
+  
+  loadCartSummary(); 
+  // Load and display cart when page loads
+  
+  // Checkout button functionality
+  function submitOrder() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const orderType = document.querySelector('input[name="orderType"]:checked')?.value;
+  
+    if (!name || !email || !phone || !address || !orderType) {
+      alert("Please fill in all fields and select an order type.");
+      return;
+    }
+  
+    // Fake order submission (clear cart and redirect)
+    localStorage.removeItem("cart");
+    window.location.href = "order-success.html";
+  }
+  
+  // Show specific form based on order type
+  function showOrderTypeForm(type) {
+    const forms = document.querySelectorAll(".order-type-form");
+    forms.forEach(form => form.style.display = "none");
+  
+    const selectedForm = document.getElementById(type);
+    if (selectedForm) {
+      selectedForm.style.display = "block";
+    }
+
+  }
+
+
 </script>
 </body>
 
