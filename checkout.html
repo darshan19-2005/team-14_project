@@ -99,7 +99,72 @@
 
   </footer>
 
-  
+ <!-- JavaScript for checkout behavior -->
+   
+  <script>
+
+    // Load cart items from localStorage
+    const cartItemsContainer = document.getElementById("cartItemsContainer");
+    const totalAmountSpan = document.getElementById("totalAmount");
+    const orderTypeRadios = document.getElementsByName("orderType");
+    const addressGroup = document.getElementById("addressGroup");
+    const phoneInput = document.getElementById("phone");
+
+    function updateCartDisplay() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("cart-item");
+        itemDiv.innerHTML = `
+          <span>${item.name}</span>
+          <span>₹${item.price} × ${item.quantity}</span>
+        `;
+
+        cartItemsContainer.appendChild(itemDiv);
+        total += item.price * item.quantity;
+      
+      }
+      );
+
+      totalAmountSpan.textContent = total;
+    }
+
+
+    function toggleAddressField() {
+      const selectedType = [...orderTypeRadios].find(r => r.checked).value;
+      if (selectedType === "delivery") {
+        addressGroup.style.display = "block";
+        document.getElementById("address").setAttribute("required", "true");
+      } 
+      else
+      {
+        addressGroup.style.display = "none";
+        document.getElementById("address").removeAttribute("required");
+      }
+
+    }
+
+    orderTypeRadios.forEach(radio => {
+      radio.addEventListener("change", toggleAddressField);
+    }
+    );
+
+    document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+// Simulate order placed
+      window.location.href = "order-success.html";
+    }
+    );
+
+    // Init
+    updateCartDisplay();
+    toggleAddressField();
+
+  </script>
+ 
 
 </body>
 
