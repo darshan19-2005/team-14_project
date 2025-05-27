@@ -58,4 +58,30 @@
     }
   </style>
 </head>
+<body>
+
+  <header>
+    <h2>ByteBites - Order Successful</h2>
+  </header>
+
+  <div class="success-container">
+    <h2>Thank you for your order!</h2>
+    <p>Your order has been successfully placed. We will contact you shortly for further details.</p>
+
+    <button class="button" onclick="goHome()">Return to Home</button>
+  </div>
+
+  <script>
+    // Redirect to home page after a few seconds
+    setTimeout(function() {
+      window.location.href = "index.html";
+    }, 5000); // Redirect after 5 seconds
+
+    function goHome() {
+      window.location.href = "index.html"; // Redirect to homepage immediately
+    }
+  </script>
+
+</body>
+</html>
 
